@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../services/location.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+
+
+const apiKey = 'a0ea109c42cd96903103df1a0beb31b3';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -9,26 +10,27 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  double latitude;
+  double longitude;
 
   @override
   void initState() {
     super.initState();
     getLocation();
-    getData();
   }
 
   void getLocation() async {
     Location location = Location();
+
     await location.getCurrentLocation();
+
+    latitude = location.latitude;
+    longitude = location.longitude;
+
+    getData();
   }
 
   void getData() async {
-    http.Response response =  await http.get(Uri.parse('https://samples.openweathermap.org/data/2.5/weather?q=London&appid=b1b15e88fa797225412429c1c50c122a1'));
-
-    if (response.statusCode == 200) {
-      String data = response.body;
-
-      var parsed = jsonDecode(data);
 
       double temperature = parsed['main']['temp'];
       int condition = parsed['weather'][0]['id'];
