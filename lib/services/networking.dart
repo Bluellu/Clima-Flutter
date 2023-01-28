@@ -7,16 +7,20 @@ class NetworkHelper {
 
   NetworkHelper(this.url);
 
-  void getData() async {
-    http.Response response =  await http.get(
-        Uri.parse('https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey')
+
+  /* Retrieve data from given API url, and parse it into an object */
+  Future getData() async {
+    http.Response response = await http.get(
+        Uri.parse(url)
     );
 
     if (response.statusCode == 200) {
       String data = response.body;
-
-      var parsed = jsonDecode(data);
-
+      return jsonDecode(data);
     }
+    else {
+      print(response.statusCode);
+    }
+  }
 
 }
