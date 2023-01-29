@@ -1,4 +1,24 @@
+import '../services/location.dart';
+import '../services/networking.dart';
+
+const apiKey = 'a0ea109c42cd96903103df1a0beb31b3';
+const openWeatherMapURL = 'https://api.openweathermap.org/data/2.5/weather';
+
 class WeatherModel {
+
+  Future<dynamic> getUpdatedWeather() async {
+    Location location = Location();
+
+    await location.getCurrentLocation();
+
+    NetworkHelper networkHelper = NetworkHelper(
+        '$openWeatherMapURL?lat=${location.latitude}&lon=${location.longitude}&appid=$apiKey&units=metric'
+    );
+
+    return await networkHelper.getData();
+  }
+
+
   String getWeatherIcon(int condition) {
     if (condition < 300) {
       return '🌩';
