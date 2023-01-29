@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import '../services/location.dart';
 import '../services/networking.dart';
 import 'location_screen.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 const apiKey = 'a0ea109c42cd96903103df1a0beb31b3';
-
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -35,13 +35,19 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => LocationScreen(loadedData: data)));
+        MaterialPageRoute(builder: (context) => LocationScreen(loadedData: data))
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      body: Center(
+        child: SpinKitFadingCircle(
+          color: Colors.white,
+          size: 70.0,
+        ),
+      ),
     );
   }
 }
