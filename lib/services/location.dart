@@ -1,7 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 
-class Location  {
-
+class Location {
   Location();
 
   double latitude;
@@ -16,14 +15,8 @@ class Location  {
 
       latitude = position.latitude;
       longitude = position.longitude;
-
     } catch (e) {
       print(e);
     }
-
-    // await Geolocator.openAppSettings();
-    // await Geolocator.openLocationSettings();
-
-    //Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
   }
 }

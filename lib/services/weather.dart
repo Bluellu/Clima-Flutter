@@ -18,6 +18,18 @@ class WeatherModel {
     return await networkHelper.getData();
   }
 
+  Future<dynamic> getTypedLocationWeather(String cityName) async {
+    try {
+      NetworkHelper networkHelper = NetworkHelper(
+          '$openWeatherMapURL?q=$cityName&appid=$apiKey&units=metric'
+      );
+
+      return await networkHelper.getData();
+    } catch (e) {
+      print(e);
+    }
+  }
+
 
   String getWeatherIcon(int condition) {
     if (condition < 300) {
